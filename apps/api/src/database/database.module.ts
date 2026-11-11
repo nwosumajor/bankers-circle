@@ -2,7 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { parseEnv } from '../config/env';
 import { DATABASE_URL, PrismaService } from './prisma.service';
 
-/** Not imported by AppModule until Phase 1 adds the first tables, so the API boots without a DB. */
+/** Provides the single PrismaService. Fails fast at boot if DATABASE_URL is missing. */
 @Global()
 @Module({
   providers: [

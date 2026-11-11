@@ -1,33 +1,21 @@
-import type { INestApplication } from '@nestjs/common';
-import { Test } from '@nestjs/testing';
 import { HealthResponseSchema } from '@circle/contracts';
 import request from 'supertest';
-import type { App } from 'supertest/types';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { AppModule } from '../src/app.module';
-import { configureApp } from '../src/app.setup';
-import { APP_VERSION } from '../src/config/tokens';
+import { createTestApp, type TestApp } from './support/test-app';
 
 describe('GET /v1/health', () => {
-  let app: INestApplication;
-  let server: App;
+  let t: TestApp;
 
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({ imports: [AppModule] })
-      .overrideProvider(APP_VERSION)
-      .useValue('test-sha')
-      .compile();
-    app = configureApp(moduleRef.createNestApplication());
-    await app.init();
-    server = app.getHttpServer() as App;
+    t = await createTestApp();
   });
 
   afterAll(async () => {
-    await app.close();
+    await t.app.close();
   });
 
   it('returns a contract-valid liveness payload', async () => {
-    const res = await request(server).get('/v1/health').expect(200);
+    const res = await request(t.server).get('/v1/health').expect(200);
     expect(HealthResponseSchema.parse(res.body)).toEqual({
       status: 'ok',
       service: 'api',
@@ -35,7 +23,16 @@ describe('GET /v1/health', () => {
     });
   });
 
-  it('is only served under the /v1 prefix', async () => {
-    await request(server).get('/health').expect(404);
+  it('returns problem+json 404 outside the /v1 prefix', async () => {
+    const res = await request(t.server)
+      .get('/health')
+      .expect(404)
+      .expect('content-type', /application\/problem\+json/);
+    expect(res.body).toMatchObject({ status: 404, code: 'NOT_FOUND', instance: '/health' });
+  });
+
+  it('returns problem+json 404 for an unknown route inside /v1', async () => {
+    const res = await request(t.server).get('/v1/nope').expect(404);
+    expect(res.body).toMatchObject({ code: 'NOT_FOUND', instance: '/v1/nope' });
   });
 });

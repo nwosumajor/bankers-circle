@@ -780,7 +780,7 @@ Not legal advice: the owner must obtain legal review. Engineering must support:
 pnpm install                 # install all workspaces
 pnpm dev                     # api + worker + web + admin (Turborepo)
 pnpm --filter mobile start   # Expo dev server
-pnpm db:up                   # start local Postgres 17 + Redis (docker compose)
+pnpm db:up                   # start local Postgres 17 (port 5433) + Redis (docker compose)
 pnpm db:down                 # stop them
 pnpm db:migrate              # apply Prisma/SQL migrations (dev)
 pnpm db:seed                 # small realistic seed

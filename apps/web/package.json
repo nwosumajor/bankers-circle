@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@circle/contracts": "workspace:*",
     "@circle/ui-web": "workspace:*",
     "next": "^16.4.6",
     "react": "19.3.0",

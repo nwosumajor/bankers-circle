@@ -1,0 +1,30 @@
+{
+  "name": "@circle/domain",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Pure TypeScript domain logic shared by api and worker. No I/O.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@circle/config": "workspace:*",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.14.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.1.0"
+  }
+}

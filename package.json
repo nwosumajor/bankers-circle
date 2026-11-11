@@ -1,0 +1,28 @@
+{
+  "name": "bankers-circle",
+  "private": true,
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "turbo run dev --filter=!@circle/mobile",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:int": "turbo run test:int",
+    "test:e2e": "turbo run test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:migrate": "pnpm --filter @circle/api db:migrate"
+  },
+  "devDependencies": {
+    "@circle/config": "workspace:*",
+    "prettier": "^3.9.10",
+    "turbo": "^2.11.10",
+    "typescript": "~6.0.3"
+  }
+}

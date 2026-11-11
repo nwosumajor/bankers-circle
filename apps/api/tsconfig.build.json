@@ -1,0 +1,9 @@
+{
+  "extends": "@circle/config/tsconfig/nestjs.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
+}

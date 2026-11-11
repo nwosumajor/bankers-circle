@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Banker'sCircle",
+    "slug": "bankerscircle",
+    "scheme": "bankerscircle",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "bundleIdentifier": "com.majorgbn.bankerscircle",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "com.majorgbn.bankerscircle"
+    },
+    "plugins": ["expo-router", "expo-status-bar"]
+  }
+}

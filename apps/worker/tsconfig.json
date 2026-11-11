@@ -1,0 +1,7 @@
+{
+  "extends": "@circle/config/tsconfig/node-library.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,10 @@
+// Models are added per module from Phase 1. Each module owns its tables (CLAUDE.md §5.1).
+// Connection URLs live in prisma.config.ts (CLI) and PrismaService (runtime, via the pg adapter).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

@@ -793,6 +793,7 @@ pnpm test:e2e                # API e2e + Playwright
 pnpm --filter mobile test:e2e  # Maestro
 pnpm load                    # k6 scenarios against staging
 pnpm api:openapi             # regenerate OpenAPI + api-client
+docker build -f docker/node-service.Dockerfile --build-arg APP=api .   # prod image (APP=api|worker), as CI builds it
 ```
 
 Workspace notes: pnpm uses `nodeLinker: hoisted` (pnpm-workspace.yaml) because Expo/Metro needs a flat
